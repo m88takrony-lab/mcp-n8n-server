@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  mcp-n8n-server:
+    image: n8n-mcp:latest
+    container_name: mcp-n8n-server
+    restart: unless-stopped
+    environment:
+      - N8N_BASE_URL=${N8N_BASE_URL}
+      - N8N_API_KEY=${N8N_API_KEY}
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    networks:
+      - n8n-mcp-network
+
+networks:
+  n8n-mcp-network:
+    driver: bridge
